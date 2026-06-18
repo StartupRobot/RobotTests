@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Deploy to Firebase
-        uses: FirebaseExtended/action-hosting-deploy@v1
+        uses: FirebaseExtended/action-hosting-deploy@release-2.0
         with:
           firebase-token: ${{ secrets.FIREBASE_TOKEN }}
           project_id: RobotTesting
