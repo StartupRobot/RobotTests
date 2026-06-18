@@ -2,24 +2,21 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - main
+      - '**'  # Trigger on every push to any branch
   pull_request:
     branches:
       - main
-    
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-    
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
-    
       - name: Deploy Preview
         if: github.event_name == 'pull_request'
         run: firebase hosting:channel:deploy ${{ github.event.pull_request.head.sha }} --token ${{ secrets.FIREBASE_TOKEN }} --project boiling-torch-3995
-    
       - name: Deploy Live
         if: github.event_name == 'push'
         run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }} --project boiling-torch-3995
